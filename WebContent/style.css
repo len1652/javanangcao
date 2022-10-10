@@ -1,0 +1,78 @@
+@charset "utf-8";
+.banquyen{
+    text-align: center;
+    color: white;
+    background: #006EB7
+}
+.body{
+	background: #ABD9FF;
+}
+.bang{
+	
+}
+.bentrai{
+	text-align: center;
+}
+.bangbentrai{
+	text-align: center;
+	
+}
+#password{
+	display: block;
+    width: 100%;
+}
+.hitec-form-signin {
+    width: 320px;
+    border: 5px solid #6bb9f0;
+    background: #f7f7f7;
+    padding: 15px;
+    height: 370px;
+    margin: 0 auto;
+    margin-top: 205px;
+    position: relative;
+}
+.hitec-form-signin .form-group .tkmk {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.hitec-form-signin .btn-custom {
+    margin: 20px auto;
+    width: 100%px;
+}
+.bang .hitec-form-signin .form-signin-heading{
+	color: #006eb7;
+}
+.form label{
+  font-weight:bold;
+  color: green;
+}
+
+.hitec-form-signin .form-group .form-control{
+	display: block;
+    width: 100%;
+}
+.bang .hitec-form-signin {
+    width: 320px;
+    border: 5px solid rgb(104, 129, 242);
+    background: #f7f7f7;
+    padding: 15px;
+    height: 370px;
+    margin: 0 auto;
+    margin-top: 205px;
+    position: relative;
+}
+.hitec-form-signin img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    right: 20px;
+}
+.btn-custom{
+	display: block;
+	width: 100%
+ 	
+}
