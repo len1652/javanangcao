@@ -25,6 +25,9 @@ public class giohangbo {
    			}
    	}
    }
+   public int Size() {
+	   return ds.size();
+   }
    
    public long Tongtien() {
 	   long s=0;
@@ -42,4 +45,7 @@ public class giohangbo {
 	  			}
 	  	}
 		}
+   public ArrayList<giohangbean> getarr() {
+	   return ds;
+   }
 }

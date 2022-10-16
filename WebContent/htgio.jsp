@@ -66,7 +66,7 @@
       <form action="xulysoluong.jsp?">
       <table class="table table-hover">
       <tr>
-		   		<td>Mã sách	</td>
+		   		<td>Chọn</td>
 			   	<td>Tên sách</td>
 			   	<td>Giá sách 	</td>
 			   	<td>Số lượng	</td>
@@ -78,29 +78,28 @@
 	   String x=request.getParameter("sl");
 	   if(gh!=null){
 		   int i=1;%>
-		   <form action="htgio.jsp">
 		   <%
 		   for(giohangbean h: gh.ds){%>
 		   		<tr>
 		   		
-		   		<td> <input type="checkbox" id="vehicle1" name="vehicle1" value="<%=i%>"> 	</td>
-			   	<td> <%=h.getTensach() %> 	</td>
-			   	<td> <%=h.getGia() %> 	</td>
-			   	<td> 
-			   		
-			   			<input name="t<%h.getMasach(); %>"  method="post" style = "width: 100px;" type="number" 
-			   		 	min="0" value="<%=h.getSoluong()%>">
-			   		 	</input>
-			   		 	<button value=<%=h.getMasach()%> name="masach"type="submit">save </button>
-			   		
-			   		
-			   	</td>
-			   	<td> <%=h.getThanhtien() %> 	</td>
-			   	<td>
-			   	
-			   		<button  name="remove"type="submit" value = <%=h.getMasach()%> >Remove </button>
-			   
-			   	 </td>
+			   		<td> <input type="checkbox" id="vehicle1" name="check<%=h.getMasach()%>" value="<%=i%>"> 	</td>
+				   	<td> <%=h.getTensach() %> 	</td>
+				   	<td> <%=h.getGia() %> 	</td>
+				   	<td> 
+				   		
+				   			<input name="sl<%=h.getMasach() %>"  method="post" style = "width: 70px;" type="number" 
+				   		 	min="0" value="<%=h.getSoluong()%>">
+				   		 	</input>
+				   		 	<button value=<%=h.getMasach()%> name="btnsave"type="submit">save </button>
+				   		
+				   		
+				   	</td>
+				   	<td> <%=h.getThanhtien() %> 	</td>
+				   	<td>
+				   	
+				   		<button  name="remove"type="submit" value = <%=h.getMasach()%> >Remove </button>
+				   		
+				   	</td>
 			 </tr>
 		   	
 		<%   
@@ -111,13 +110,23 @@
 		
 			
 			<td>
-	        	<a href="detele.jsp?clean=1">Clear all</a>
+	        	<button  name="clear"type="submit" value="lear" >Clear </button>
+	        	
+           	</td>
+           	<td>
+           		<button  name="removechk"type="submit" value = "xoa" >ReSelect  </button>
            	</td>
         </tr>
      </table>
      </form>
      			<h1 >
-	        	Tổng tiền: <%out.print(gh.Tongtien()); %>
+	        	Tổng tiền: <%if(gh!=null){
+	        		out.print(gh.Tongtien());
+	        	}else{
+	        		out.print("0");
+	        	}
+	        		%>
+	        	
 	        	</h1>
      			
       <td width ="200" valign="top">

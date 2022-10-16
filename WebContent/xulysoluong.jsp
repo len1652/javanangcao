@@ -1,4 +1,6 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="bo.giohangbo"%>
+<%@page import="bean.*"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -10,45 +12,46 @@
 </head>
 <body>
 		<%
-		String msx=request.getParameter("remove");
-		String clear=request.getParameter("clear");
-   		String n=request.getParameter("number");
-		String masach=request.getParameter("masach");
-		//out.print(n+":"+masach);
-   		//tao biến session
+		String masach = request.getParameter("btnsave");
+		String sl=request.getParameter("sl"+masach);
+		String delete = request.getParameter("remove");
+		String clear = request.getParameter("clear");
+		String clSelect = request.getParameter("removechk");
 		
-		giohangbo gh;//= new giohangbo();
-		//b1: gan session vao 1 bien
+		//tao biến session
+		giohangbo gh;
+		// bước 1: Lay gia tri cua bien session luu vao bien
 		gh=(giohangbo) session.getAttribute("gio");
 		//b2: Thao tac trên bien: gh
-		long nn=Long.parseLong(n);
-		if(nn==0){
-			gh.remove(masach);
-		}
-		else {
+		if (sl!=null && masach!=null){		
+			long nn=Long.parseLong(sl); // số lượng là kiểu long, Long là kiểu .parselong là đổi sl String về long
+			// cập nhật số lương
 			gh.Up(masach, nn);	
 		}
-		if (request.getParameter("remove")!=null) {
-			gh.remove(masach);
-    		response.sendRedirect("htgio.jsp");
-    		return ;	
+		if (delete!=null){					
+			gh.remove(delete);
 		}
-		
-		if (request.getParameter("clean")!=null) {
-			session.removeAttribute("gio");
-    		response.sendRedirect("htgio.jsp");
-    		return ;	
+		if(clSelect!=null && gh!=null){
+			ArrayList<giohangbean> ds =  gh.getarr();
+			for(int i = 0; i<gh.Size(); i++){
+				String danhdau=request.getParameter("check"+ds.get(i).getMasach());
+				if(danhdau!=null){
+					ds.remove(i);
+					i--;
+				}
+			}
 		}
-		//b3: Luu gh vao session
+		// bước 3
+		//đưa vào ass
 		session.setAttribute("gio", gh);
-		//Hien thi gio
-  	response.sendRedirect("htgio.jsp");
-		
-		out.println ("</hr>");
-		String[] gtcheck=request.getParameterValues("");
-		for(String ss: gtcheck){
-			
+		if (clear!=null){					// 
+			session.removeAttribute("gio");	// 
 		}
+		
+		
+		//Hien thi gio
+		response.sendRedirect("htgio.jsp");
+   		
 		
    	%>
  	

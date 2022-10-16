@@ -28,7 +28,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="thoat.jsp"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
       <%if(session.getAttribute("dn")==null){ %>
-      <li><a href="dangnhap.jsp">
+      <li><a href="ktdnController">
       <span class="glyphicon glyphicon-log-in"></span> 
       		Login
       </a></li>
@@ -83,7 +83,7 @@
 	              <%=s.getTensach() %> <br>
 	              <%=s.getTacgia() %> <br>
 	              <%=s.getGia() %> <br>
-<a href="giohang.jsp?ms=<%=s.getMasach()%>&ts=<%=s.getTensach()%>&gia=<%=s.getGia()%>">
+					<a href="giohang?ms=<%=s.getMasach()%>&ts=<%=s.getTensach()%>&gia=<%=s.getGia()%>">
 	              <img src="buynow.jpg">
 	            </a> 
 
@@ -97,7 +97,7 @@
 	              <%=s.getTensach() %> <br>
 	              <%=s.getTacgia() %> <br>
 	              <%=s.getGia() %> <br>
-<a href="giohang.jsp?ms=<%=s.getMasach()%>&ts=<%=s.getTensach()%>&gia=<%=s.getGia()%>">
+					<a href="giohang.jsp?ms=<%=s.getMasach()%>&ts=<%=s.getTensach()%>&gia=<%=s.getGia()%>">
 	              <img src="buynow.jpg">
 	            </a> 
 
