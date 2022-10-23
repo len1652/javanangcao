@@ -12,7 +12,7 @@
 <%
    String masach =request.getParameter("ms");
 	String tensach =request.getParameter("ts");
-long gia=Long.parseLong(request.getParameter("gia"));
+	long gia=Long.parseLong(request.getParameter("gia"));
 	giohangbo gh=null;
 	//Neu mua lan dau thi tao cho kh 1 gio: session
 	if(session.getAttribute("gio")==null){

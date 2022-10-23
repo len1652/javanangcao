@@ -24,7 +24,7 @@
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a href="htsach.jsp">Trang chủ</a></li>
+      <li class="active"><a href="htsachController">Trang chủ</a></li>
       <li><a href="htgio.jsp">Giỏ hàng</a></li>
         <li><a href="thanhtoan.jsp">Thanh toán</a></li>
           <li><a href="lichsu.jsp">Lịch sử mua hàng: <%=session.getAttribute("ss") %></a></li>
@@ -45,16 +45,19 @@
     </ul>
   </div>
 </nav>
-<%loaibo lbo=new loaibo();
-  sachbo sbo=new sachbo();
+<%
+
+ArrayList<loaibean> dsloai=(ArrayList<loaibean>)request.getAttribute("dsloai");
+ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
+
 %>
 <table width ="1000" align="center">
    <tr>
      <td width ="200" valign="top">
-       <table class="table table-hover">
-         <%for(loaibean l: lbo.getloai()){ %>
+       <table class="table dssach">
+         <%for(loaibean l: dsloai){ %>
          <tr><td>
-           <a href="htsach.jsp?ml=<%=l.getMaloai()%>">
+           <a href="xulysoluongController?ml=<%=l.getMaloai()%>">
                <%=l.getTenloai() %>
             </a>
            </td>
@@ -63,7 +66,10 @@
        </table>
      </td>
       <td width ="600" valign="top">
-      <form action="xulysoluong.jsp?">
+      
+      <form action="xulysoluongController">
+      
+      
       <table class="table table-hover">
       <tr>
 		   		<td>Chọn</td>
@@ -87,10 +93,10 @@
 				   	<td> <%=h.getGia() %> 	</td>
 				   	<td> 
 				   		
-				   			<input name="sl<%=h.getMasach() %>"  method="post" style = "width: 70px;" type="number" 
+				   			<input name="sl<%=h.getMasach()%>"  method="post" style = "width: 70px;" type="number" 
 				   		 	min="0" value="<%=h.getSoluong()%>">
 				   		 	</input>
-				   		 	<button value=<%=h.getMasach()%> name="btnsave"type="submit">save </button>
+				   		 	<button value=<%=h.getMasach()%> name="btnsave" 	type="submit">save </button>
 				   		
 				   		
 				   	</td>
@@ -119,6 +125,11 @@
         </tr>
      </table>
      </form>
+     
+     
+     
+     
+     
      			<h1 >
 	        	Tổng tiền: <%if(gh!=null){
 	        		out.print(gh.Tongtien());
@@ -130,7 +141,7 @@
 	        	</h1>
      			
       <td width ="200" valign="top">
-      <form action="htsach.jsp" method="post">
+      <form action="htsachController" method="post">
  		 <input  class="form-control"  name="txttk" type="text" value="" placeholder="Nhap tt"> <br>
   		 <input class="btn-primary"  name="butt" type="submit" value="Search">
 		</form>

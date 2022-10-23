@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,19 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import bean.sachbean;
+import bo.loaibo;
+import bo.sachbo;
 
 /**
- * Servlet implementation class ktdnController
+ * Servlet implementation class htsachController
  */
-@WebServlet("/ktdnController")
-public class ktdnController extends HttpServlet {
+@WebServlet("/htsachController")
+public class htsachController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ktdnController() {
+    public htsachController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,30 +33,27 @@ public class ktdnController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String un = request.getParameter("txtun");
-		String pass=request.getParameter("txtpass");
-		RequestDispatcher rd;
-		if (un !=null && pass !=null) {
-			if(un.equals("abc")&&pass.equals("abc")){
-				if(un.equals("abc")&&pass.equals("123")) {
-					// tạo ra đối tượng session
-					HttpSession session = request.getSession();
-					session.setAttribute("dn", un);
-					rd=request.getRequestDispatcher("htsach.jsp");
-				}else {// dang nhap lai
-					rd = RequestDispatcher("dangnhap.jsp?kt1");
-					rd.forward(request, response);
-				}
-			}
-		}
+		loaibo lbo = new loaibo();
+		request.setAttribute("dsloai", lbo.getloai());
 		
-		rd = request.getRequestDispatcher("htsach.jsp");
+		sachbo sbo = new sachbo();
+		
+		 request.setCharacterEncoding("utf-8");
+	     response.setCharacterEncoding("utf-8");
+	     String ml=request.getParameter("ml");
+	     String key=request.getParameter("txttk");
+	     ArrayList<sachbean> dssach=sbo.getsach();
+	     if(dssach!=null) {
+	    	 if(ml!=null)
+		    	 dssach=sbo.TimMa(ml);
+		     else
+		    	 if(key!=null)
+			    	 dssach=sbo.Tim(key);
+	    }
+	    request.setAttribute("dssach", dssach);
+	     
+	    RequestDispatcher rd=request.getRequestDispatcher("htsach.jsp");
 		rd.forward(request, response);
-	}
-
-	private RequestDispatcher RequestDispatcher(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
