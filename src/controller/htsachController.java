@@ -37,7 +37,7 @@ public class htsachController extends HttpServlet {
 		request.setAttribute("dsloai", lbo.getloai());
 		
 		sachbo sbo = new sachbo();
-		
+		// code nay detestcho huyen nhu
 		 request.setCharacterEncoding("utf-8");
 	     response.setCharacterEncoding("utf-8");
 	     String ml=request.getParameter("ml");
