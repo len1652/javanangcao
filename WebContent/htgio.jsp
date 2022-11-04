@@ -57,7 +57,7 @@ ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
        <table class="table dssach">
          <%for(loaibean l: dsloai){ %>
          <tr><td>
-           <a href="xulysoluongController?ml=<%=l.getMaloai()%>">
+           <a href="htsachController?ml=<%=l.getMaloai()%>">
                <%=l.getTenloai() %>
             </a>
            </td>

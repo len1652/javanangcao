@@ -1,3 +1,4 @@
+
 <%@page import="bean.sachbean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bo.sachbo"%>
@@ -52,6 +53,8 @@
          <%for(loaibean l: lbo.getloai()){ %>
          <tr><td>
            <a href="htsachController?ml=<%=l.getMaloai()%>">
+               <%=l.getTenloai() %>
+            </a><a href="htsachController?ml=<%=l.getMaloai()%>">
                <%=l.getTenloai() %>
             </a>
            </td>

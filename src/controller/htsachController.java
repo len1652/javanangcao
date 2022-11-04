@@ -52,7 +52,7 @@ public class htsachController extends HttpServlet {
 	    }
 	    request.setAttribute("dssach", dssach);
 	     
-	    RequestDispatcher rd=request.getRequestDispatcher("htsach.jsp");
+	    RequestDispatcher rd=request.getRequestDispatcher("htsach1.jsp");
 		rd.forward(request, response);
 	}
 
