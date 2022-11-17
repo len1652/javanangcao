@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import bean.giohangbean;
 import bean.sachbean;
 import bo.giohangbo;
 import bo.loaibo;
 import bo.sachbo;
 
-/**
- * Servlet implementation class htgioController
- */
+
 @WebServlet("/htgioController")
 public class htgioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,20 +46,18 @@ public class htgioController extends HttpServlet {
 	    giohangbo gh;
 		// bước 1: Lay gia tri cua bien session luu vao bien
 	    gh=(giohangbo) session.getAttribute("gio");
-	    if(gh != null) {
-	    	request.setAttribute("gio", gh);
+	    if(gh.ds !=null) {
+	    	request.setAttribute("giohang", gh.ds);
 	    	RequestDispatcher rd ;
-		
 	    }
-
-	    	loaibo lbo = new loaibo();
-	    	sachbo sbo = new sachbo();
-		    request.setAttribute("dsloai", lbo.getloai());
-		    request.setAttribute("dssach", sbo.getsach());
-
-		
+	    
+	   
+    	loaibo lbo = new loaibo();
+    	sachbo sbo = new sachbo();
+	    request.setAttribute("dsloai", lbo.getloai());
+	    request.setAttribute("dssach", sbo.getsach());
 		RequestDispatcher rd ;
-		rd = request.getRequestDispatcher("htgio.jsp");
+		rd = request.getRequestDispatcher("htgio1.jsp");
 		rd.forward(request, response);
 	}
 

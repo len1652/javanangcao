@@ -1,4 +1,4 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.awt.print.Printable"%>
 <%@page import="bean.giohangbean"%>
 <%@page import="bo.giohangbo"%>
@@ -25,46 +25,46 @@
     
     <ul class="nav navbar-nav">
       <li class="active"><a href="htsachController">Trang chủ</a></li>
-      <li><a href="htgio.jsp">Giỏ hàng</a></li>
-        <li><a href="thanhtoan.jsp">Thanh toán</a></li>
-          <li><a href="lichsu.jsp">Lịch sử mua hàng: <%=session.getAttribute("ss") %></a></li>
+      <li><a href="htgioController">Giỏ hàng</a></li>
+        <li><a href="thanhtoanController">Thanh toán</a></li>
+          <li><a href="lichsuController">Lịch sử mua hàng: <%=session.getAttribute("ss") %></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="thoat.jsp"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-      <%if(session.getAttribute("dn")==null){ %>
-      <li><a href="dangnhap.jsp">
-      <span class="glyphicon glyphicon-log-in"></span> 
+      
+      <c:if test = "${taikhoan == null}">
+     
+         <li><a href="ktdnController">
+      		<span class="glyphicon glyphicon-log-in"></span> 
       		Login
       </a></li>
-      <%}else{ %>
-      <li><a href="#">
+      </c:if>
+      <c:if test="${taikhoan != null}">
+      <li><a href="htsachController?logout=out"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+      		<li><a href="#">
       <span class="glyphicon glyphicon-log-in"></span> 
-      		Hi: <%=session.getAttribute("dn") %>
+      		Hi: ${taikhoan}
       </a></li>
-      <%} %>
+      </c:if>
+      
     </ul>
   </div>
 </nav>
-<%
 
-ArrayList<loaibean> dsloai=(ArrayList<loaibean>)request.getAttribute("dsloai");
-ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
 
-%>
 <table width ="1000" align="center">
    <tr>
      <td width ="200" valign="top">
        <table class="table dssach">
-       
-       
-         <%for(loaibean l: dsloai){ %>
-         <tr><td>
-           <a href="htsachController?ml=<%=l.getMaloai()%>">
-               <%=l.getTenloai() %>
-            </a>
-           </td>
-           </tr>
-           <%} %>
+       	
+       	<c:forEach var = "l" items="${dsloai }">
+       		<tr>
+       			<td>
+       				<a href="htsachController?ml=${l.getMaloai() }">
+       					${l.getTenloai()}
+       				</a>
+       			</td>
+       		</tr>
+       	</c:forEach>
        </table>
      </td>
       <td width ="600" valign="top">
@@ -81,39 +81,34 @@ ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
 			   	<td>Thành tiền	</td>
 			   	
 		</tr>
-	    <%
-	   giohangbo gh=(giohangbo)session.getAttribute("gio");
-	   String x=request.getParameter("sl");
-	   if(gh!=null){
-		   int i=1;%>
-		   <%
-		   for(giohangbean h: gh.ds){%>
+	    
+	   	<c:set var = "i" scope = "session" value = "${1}"/>
+	   	
+	   	<c:forEach var ="h" items = "${giohang}">
 		   		<tr>
 		   		
-			   		<td> <input type="checkbox" id="vehicle1" name="check<%=h.getMasach()%>" value="<%=i%>"> 	</td>
-				   	<td> <%=h.getTensach() %> 	</td>
-				   	<td> <%=h.getGia() %> 	</td>
+			   		<td> <input type="checkbox" id="vehicle1" name="check${h.getMasach() }" value="${i}"> 	</td>
+				   	<td> ${h.getTensach() } 	</td>
+				   	<td> ${h.getGia() } 	</td>
 				   	<td> 
 				   		
-				   			<input name="sl<%=h.getMasach()%>"  method="post" style = "width: 70px;" type="number" 
-				   		 	min="0" value="<%=h.getSoluong()%>">
+				   			<input name="sl${h.getMasach() }"  method="post" style = "width: 70px;" type="number" 
+				   		 	min="0" value="${h.getSoluong() }">
 				   		 	</input>
-				   		 	<button value=<%=h.getMasach()%> name="btnsave" 	type="submit">save </button>
+				   		 	<button value=${h.getMasach() } name="btnsave" 	type="submit">save </button>
 				   		
 				   		
 				   	</td>
-				   	<td> <%=h.getThanhtien() %> 	</td>
+				   	<td> ${h.getThanhtien()} 	</td>
 				   	<td>
 				   	
-				   		<button  name="remove"type="submit" value = <%=h.getMasach()%> >Remove </button>
+				   		<button  name="remove"type="submit" value = ${h.getMasach() } >Remove </button>
 				   		
 				   	</td>
 			 </tr>
-		   	
-		<%   
-			i++;}
-	   }
-%>		
+		   	<c:set var = "i" scope = "session" value = "${i+1}"/>
+	   </c:forEach>
+	   	
 		<tr>
 		
 			
@@ -124,6 +119,20 @@ ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
            	<td>
            		<button  name="removechk"type="submit" value = "xoa" >ReSelect  </button>
            	</td>
+           	
+           	<td></td>
+           	
+           	<td></td>
+           	<td></td>
+           	
+           	<td>
+           		
+           	</td>
+           	<tr style="font-weight: bold; color:blue; text-align:right ">
+                 <td colspan="9" align="center">
+                     <a href="/GioHang/Dathang">ĐẶT HÀNG</a>
+                 </td>
+             </tr>
         </tr>
      </table>
      </form>
@@ -133,14 +142,15 @@ ArrayList<sachbean> dssach=(ArrayList<sachbean>)request.getAttribute("dssach");
      
      
      			<h1 >
-	        	Tổng tiền: <%if(gh!=null){
-	        		out.print(gh.Tongtien());
-	        	}else{
-	        		out.print("0");
-	        	}
-	        		%>
+	        	Tổng tiền: 
+	        	<c:set var = "tt" scope = "session" value = "${0}"/>
+	        	<c:forEach var ="h" items = "${giohang}">
+	        		<c:set var = "tt" scope = "session" value = "${tt + h.getThanhtien() }"/>
+	        	</c:forEach>
+	        	<c:out value="${tt}"></c:out>
 	        	
 	        	</h1>
+	        	
      			
       <td width ="200" valign="top">
       <form action="htsachController" method="post">

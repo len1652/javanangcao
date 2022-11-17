@@ -34,12 +34,13 @@ public class xulysoluongController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
+		
 		String masach = request.getParameter("btnsave");
 		String sl=request.getParameter("sl"+masach);
 		String delete = request.getParameter("remove");
 		String clear = request.getParameter("clear");
 		String clSelect = request.getParameter("removechk");
-		
+		String dathang = request.getParameter("dathang");
 		//tao biến session
 		giohangbo gh;
 		// bước 1: Lay gia tri cua bien session luu vao bien
@@ -67,7 +68,10 @@ public class xulysoluongController extends HttpServlet {
 		//đưa vào ass
 		session.setAttribute("gio", gh);
 		if (clear!=null){					// 
-			session.removeAttribute("gio");	// 
+//			session.removeAttribute("gio");	// 
+			gh=(giohangbo) session.getAttribute("gio");
+			gh.ds.clear();
+			session.setAttribute("gio", gh);
 		}
 		
 		response.sendRedirect("htgioController");

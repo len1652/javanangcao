@@ -16,7 +16,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
+
+  
+
+ <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     
@@ -27,30 +32,15 @@
           <li><a href="lichsuController">Lịch sử mua hàng: <%=session.getAttribute("ss") %></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      
-      <c:if test = "${taikhoan == null}">
-     
-         <li><a href="ktdnController">
-      		<span class="glyphicon glyphicon-log-in"></span> 
-      		Login
-      </a></li>
-      </c:if>
-      <c:if test="${taikhoan != null}">
-      <li><a href="htsachController?logout=out"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-      		<li><a href="#">
-      <span class="glyphicon glyphicon-log-in"></span> 
-      		Hi: ${taikhoan}
-      </a></li>
-      </c:if>
-      
+      <li><a href="thoat.jsp"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+      <li><a href="dangnhap.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
 
-
-<table width ="1400" align="center">
+<table width ="1000" align="center">
    <tr>
-     <td width ="200" valign="top">
+      <td width ="200" valign="top">
        <table class="table table-hover">
          <c:forEach var ="l" items = "${dsloai}">
          <tr>
@@ -63,10 +53,9 @@
          </c:forEach>
        </table>
      </td>
-      <td width ="1000" valign="top">
-      
-      <table class="table table-hover" style="border-width: 20dp">
-      <tr  class="col-md-9" align="center"  height="200" >
+      <td width ="600" valign="top">
+      <table class="table table-hover">
+	    	<tr  class="col-md-9" align="center"  height="200" >
               
                 	<div class="row carousel-holder" align="center">
                     <div class="col-md-12">
@@ -101,71 +90,32 @@
                 </div>
        
              </tr>
-      
-
-      	<tr >
-      	<div>
-					<h3 style="Text-align:Center; color:red"> SÁCH MỚI </h3>
-                    <div class="row">
-                    	<c:forEach var ="s" items="${dssach}">
-                    		<div class="col-sm-4 col-lg-4 col-md-4">
-                    			<div class="thumbnail">
-                    				<img src="${s.getAnh() }"  style="width: 300px; height: 280px"> <br>
-                    				<div style="height: 40px">
-                    					<h4 style="text-align: left ; padding-left :10px ">
-                    						${ s.getTensach()} <br>
-                    					</h4>
-                    				</div>
-                    				
-                    				<div style="height: 40px">
-                    					<h4 style="text-align: left ; padding-left :5px ">
-                    						${ s.getGia()} <br>
-                    					</h4>
-                    				</div>
-                    				
-                    				<a href="giohangController?ms=${s.getMasach()}&ts=${s.getTensach()}&gia=${s.getGia()}">
-	      								<img  src="buynow.jpg">
-	      							</a>
-                    			</div>
-                    		</div>
-				      	</c:forEach>
-                        
-                     </div>
-                    <div class="MenuTrang">
-
-                        <div class="pagination-container" href="htsachController?page=1">
-	                        <ul class="pagination">
-		                        <<c:forEach var ="pg" items="${sotrang}">
-			                    			
-			                    			
-			                    			
-			                    			
-	                    						
-	                    						
-								                        <li>
-								                        	<a href="htsachController?page=${pg}&ml=${mloai}">${pg+1 }</a>
-								                        </li>
-						                        
-					                        
-							                        
-			              
-							     </c:forEach>
-	                        </ul>
-                        </div>
-                    </div>
-                    <style>
-                        .MenuTrang li {
-                            display: inline;
-                        }
-                    </style>
-                </div>
-          </tr>
-	     
+             <tr  class="col-md-9" align="center"  height="200" >
+             		<form action="ktdnController?kt=1" method="post">
+    	
+							<h3 style="text-align:center">ĐĂNG NHẬP</h3>
+              
+			                <input  class="form-control"  name="txtun" type="text" value=""  placeholder="Tài khoản"> <br>
+			                
+							<input  class="form-control"  name="txtpass" type="text" value=""  placeholder="Mật khẩu"> <br>
+							<c:if test = "${ktra ==1}">
+						         	<h4 style="color: red;"> tài khoản hoặc mật khẩu sai</h4>
+						    </c:if>
+							
+				  			<input class="btn btn-primary"  name="butdn" type="submit" value="Đăng nhập">  
+				  			
+                       						
+												                       
+					</form>
+             	
+                    
+             </tr>
+    			
+	          
      </table>
      </td>
       <td width ="200" valign="top">
-      
-     <form action="htsachController" method="post">
+      <form action="htsachController" method="post">
     	
 			<input  class="form-control"  name="txttk" type="text" value=""  placeholder="Nhap tt"> <br>
   			<input class="btn-primary"  name="butt" type="submit" value="Search">                   						
@@ -175,6 +125,6 @@
    </tr>
 </table>
 
-
+</body>
 </body>
 </html>

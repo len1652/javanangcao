@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
+import bean.khachhangbean;
+import bean.taikhoanbean;
+import bo.dangnhapbo;
+import bo.khachhangbo;
+import bo.loaibo;
+import dao.dangnhapdao;
 
 /**
  * Servlet implementation class ktdnController
@@ -29,25 +38,39 @@ public class ktdnController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		loaibo lbo = new loaibo();
+		request.setAttribute("dsloai", lbo.getloai());
 		String un = request.getParameter("txtun");
-		String pass=request.getParameter("txtpass");
+		String pass= request.getParameter("txtpass");
+		String kt= request.getParameter("kt");
 		RequestDispatcher rd;
+		dangnhapbo dnbo = new dangnhapbo();
+		khachhangbo khbo = new khachhangbo();
+		ArrayList<taikhoanbean> dstk = dnbo.gettk();
+		ArrayList<khachhangbean> dstkkh = khbo.getkh();
+		System.out.println("hello");
+		System.out.println(dstkkh.get(0).getHoten());
 		if (un !=null && pass !=null) {
-			if(un.equals("abc")&&pass.equals("abc")){
-				if(un.equals("abc")&&pass.equals("123")) {
-					// tạo ra đối tượng session
-					HttpSession session = request.getSession();
-					session.setAttribute("dn", un);
-					rd=request.getRequestDispatcher("htsach.jsp");
-				}else {// dang nhap lai
-					rd = RequestDispatcher("dangnhap.jsp?kt1");
-					rd.forward(request, response);
+			for(int i = 0; i<dstkkh.size(); i++) {
+				if (dstkkh.get(i).getTendn().equals(un) && dstkkh.get(i).getPass().equals(pass)) {
+					session.setAttribute("taikhoan", un);
+					response.sendRedirect("htsachController");
+					return;
 				}
 			}
+			request.setAttribute("ktra", kt);
 		}
-		
-		rd = request.getRequestDispatcher("htsach.jsp");
+		else {
+			
+			System.out.println("truong hop else");
+			rd = request.getRequestDispatcher("dangnhap1.jsp");
+			rd.forward(request, response);
+		}
+		rd = request.getRequestDispatcher("dangnhap1.jsp");
 		rd.forward(request, response);
+		
 	}
 
 	private RequestDispatcher RequestDispatcher(String string) {
