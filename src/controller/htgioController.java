@@ -46,7 +46,7 @@ public class htgioController extends HttpServlet {
 	    giohangbo gh;
 		// bước 1: Lay gia tri cua bien session luu vao bien
 	    gh=(giohangbo) session.getAttribute("gio");
-	    if(gh.ds !=null) {
+	    if(gh !=null) {
 	    	request.setAttribute("giohang", gh.ds);
 	    	RequestDispatcher rd ;
 	    }

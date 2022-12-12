@@ -55,7 +55,7 @@ public class ktdnController extends HttpServlet {
 		if (un !=null && pass !=null) {
 			for(int i = 0; i<dstkkh.size(); i++) {
 				if (dstkkh.get(i).getTendn().equals(un) && dstkkh.get(i).getPass().equals(pass)) {
-					session.setAttribute("taikhoan", un);
+					session.setAttribute("taikhoan", dstkkh.get(i));
 					response.sendRedirect("htsachController");
 					return;
 				}

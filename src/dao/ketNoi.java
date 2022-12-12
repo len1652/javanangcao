@@ -11,7 +11,7 @@ public class ketNoi {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			System.out.println("Xong b1");
 			
-			String url = "jdbc:sqlserver://Cen\\sqlexpress:1433;databaseName=QlSach;user=sa; password=123";
+			String url = "jdbc:sqlserver://ADMIN:1433;databaseName=QlSach;user=sa; password=123";
 			cn = DriverManager.getConnection(url);
 			System.out.println("xong b2");
 			

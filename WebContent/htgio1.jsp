@@ -24,10 +24,10 @@
   <div class="container-fluid">
     
     <ul class="nav navbar-nav">
-      <li class="active"><a href="htsachController">Trang chủ</a></li>
+      <li><a href="htsachController">Trang chủ</a></li>
       <li><a href="htgioController">Giỏ hàng</a></li>
-        <li><a href="thanhtoanController">Thanh toán</a></li>
-          <li><a href="lichsuController">Lịch sử mua hàng: <%=session.getAttribute("ss") %></a></li>
+        <li><a href="dathangController">Thanh toán</a></li>
+          <li><a href="lichsuController">Lịch sử mua hàng</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       
@@ -42,7 +42,7 @@
       <li><a href="htsachController?logout=out"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
       		<li><a href="#">
       <span class="glyphicon glyphicon-log-in"></span> 
-      		Hi: ${taikhoan}
+      		Hi: ${taikhoan.getHoten()}
       </a></li>
       </c:if>
       
@@ -130,7 +130,7 @@
            	</td>
            	<tr style="font-weight: bold; color:blue; text-align:right ">
                  <td colspan="9" align="center">
-                     <a href="/GioHang/Dathang">ĐẶT HÀNG</a>
+                     <a href="dathangController">ĐẶT HÀNG</a>
                  </td>
              </tr>
         </tr>

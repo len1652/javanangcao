@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.khachhangbean;
 import bean.sachbean;
 import bo.loaibo;
 import bo.sachbo;
@@ -38,8 +39,7 @@ public class htsachController extends HttpServlet {
 		
 		loaibo lbo = new loaibo();
 		request.setAttribute("dsloai", lbo.getloai());
-		
-		
+		System.out.println(lbo.getloai().get(0).getMaloai());
 		
 		sachbo sbo = new sachbo();
 		
@@ -51,7 +51,7 @@ public class htsachController extends HttpServlet {
 	     String ml=request.getParameter("ml");
 	     String key=request.getParameter("txttk");
 	     ArrayList<sachbean> dssach=sbo.getsach();
-	     String un = (String) session.getAttribute("taikhoan");
+	     khachhangbean un =  (khachhangbean) session.getAttribute("taikhoan");
 	     String page = request.getParameter("page");
 	     String logout = request.getParameter("logout");
 	     
@@ -108,7 +108,7 @@ public class htsachController extends HttpServlet {
 	     if(logout!=null) {
 	    	session.removeAttribute("taikhoan");
 	     }
-	     
+	     session.setAttribute("taikhoan", un);
 	     
 	     
 	    request.setAttribute("mloai", ml);
